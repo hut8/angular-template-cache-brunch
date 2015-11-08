@@ -1,0 +1,34 @@
+{
+  "name": "angular-template-cache-brunch",
+  "version": "1.8.0",
+  "description": "Insert angular templates into $templateCache. Configurable with cool ES6 syntax",
+  "main": "lib/index",
+  "scripts": {
+    "test": "echo 'Write Tests'",
+    "prepublish": "babel src -out-dir lib",
+    "dev": "babel src -out-dir lib -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-walker23/angular-template-cache-brunch.git"
+  },
+  "keywords": [
+    "angularjs",
+    "brunch",
+    "ES6",
+    "ES2015",
+    "$templateCache"
+  ],
+  "author": "John Walker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-walker23/angular-template-cache-brunch/issues"
+  },
+  "homepage": "https://github.com/j-walker23/angular-template-cache-brunch#readme",
+  "peerDependencies": {
+    "brunch": ">= 1.8.0 < 2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.2"
+  }
+}
