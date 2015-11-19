@@ -26,12 +26,16 @@
     "build": "babel src --out-dir lib",
     "build:watch": "npm run build -- -w",
     "start": "npm-run-all -p test:watch build:watch",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "commit": "commit-wizard"
   },
   "config": {
     "pre-git": {
       "pre-commit": "npm test",
-      "post-merge": "npm install"
+      "post-merge": "npm install",
+      "commit-msg": "validate-commit-msg",
+      "pre-push": [],
+      "post-commit": []
     }
   },
   "peerDependencies": {
