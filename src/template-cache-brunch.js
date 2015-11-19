@@ -1,18 +1,15 @@
 'use strict'
 import debug from 'debug'
-import promAll from 'es6-promisify-all'
 import Minimize from 'minimize'
-let fs = promAll(require('fs'))
-
-let log = debug('angular-template-cache')
-log.log = console.log.bind(console)
-promAll(Minimize.prototype)
+import promisify from 'es6-promisify-all'
 
 /**
  * @author john
  * @version 11/8/15 3:56 PM
  */
 
+promisify(Minimize.prototype)
+let log = debug('angular-template-cache')
 
 class AngularTemplateCacheCompiler {
 
@@ -29,6 +26,7 @@ class AngularTemplateCacheCompiler {
     this.pathTransform = this.options.pathTransform || this._defaultPathTransform
     this.minimize = new Minimize(this.options.htmlmin)
     if (this.options.module) this.module = this.options.module
+    log('options', this.options)
   }
 
   _defaultPathTransform (path) {
@@ -47,6 +45,7 @@ class AngularTemplateCacheCompiler {
   }
 
   compile (data, path, callback) {
+    log('compile', path)
     this.minimize
       .parseAsync(data)
       .then(minData => callback(null, this.wrapper(path, minData)))
