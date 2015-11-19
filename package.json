@@ -23,10 +23,10 @@
   "scripts": {
     "test": "mocha -u qunit --compilers js:babel-core/register -R mocha-better-spec-reporter --check-leaks ./test/*.spec.js ./test/**/*.spec.js",
     "test:watch": "DEBUG=angular-template-cache npm test -- -w",
-    "build": "babel src --out-dir lib",
-    "build:watch": "npm run build -- -w",
-    "start": "npm-run-all -p test:watch build:watch",
-    "prepublish": "npm run build",
+    "compile": "babel src --out-dir lib",
+    "compile:watch": "npm run compile -- -w",
+    "start": "npm-run-all -p test:watch compile:watch",
+    "prepublish": "npm run compile",
     "commit": "commit-wizard"
   },
   "config": {
