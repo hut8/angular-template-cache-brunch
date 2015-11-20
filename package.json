@@ -21,13 +21,16 @@
     "$templateCache"
   ],
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register",
-    "test:watch": "DEBUG=angular-template-cache npm test -- -w",
-    "test:cov": "rm -rf reports && babel-node ./node_modules/.bin/isparta cover  --dir reports/coverage --report text --report html _mocha",
-    "compile": "babel src --out-dir lib",
-    "compile:watch": "npm run compile -- -w",
-    "start": "npm-run-all -p test:watch compile:watch",
-    "prepublish": "npm run compile",
+    "coverage": "rm -rf reports && babel-node ./node_modules/.bin/isparta cover  --dir reports/coverage --report text --report html _mocha",
+    "bdd": "mocha --compilers js:babel-core/register -w",
+    "lint": "echo \"Get eslint when eslint-babel supports v6\"",
+    "test": "npm run lint && npm run coverage",
+    "build": "rm -rf lib && babel src --out-dir lib",
+    "build:watch": "npm run build -- -w",
+    "start": "npm-run-all -p test:watch build:watch",
+    "prepush": "npm test",
+    "prepublish": "npm run build",
+    "postversion": "git push --follow-tags",
     "commit": "commit-wizard"
   },
   "config": {
