@@ -24,7 +24,8 @@ export default {
   compile: {
     inHtml: '<div class="s" class></div>',
     path: 'test/path.tpl.html',
-    outHtml: 'angular.module("app").run(["$templateCache", $templateCache => {\n  $templateCache.put("test/path.tpl.html",\n      "<div class=s></div>")}])\n  '
+    outHtml: 'angular.module("app").run(["$templateCache", $templateCache => {\n  $templateCache.put("test/path.tpl.html",\n      "<div class=s></div>")}])\n  ',
+    err: 'fuck'
   },
 
   bare: {

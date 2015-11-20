@@ -2,9 +2,15 @@ import Plugin from '../src/template-cache-brunch'
 import data from './template-cache-brunch.data'
 import Minimize from 'minimize'
 import debug from 'debug'
-import * as chai from 'chai'
-chai.config.includeStack = true;
-chai.should()
+import chai from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
+import sinonPromise from 'sinon-stub-promise'
+import _ from 'lodash'
+
+let should = chai.should()
+chai.use(sinonChai)
+sinonPromise(sinon)
 let log = debug('angular-template-cache')
 log.log = console.log.bind(console)
 
@@ -18,7 +24,6 @@ let plugin = new Plugin(data.config)
 
 suite('- Setup')
 test('initial class properties', done => {
-  let {module, tplPath} = data.setup
   plugin.brunchPlugin.should.eql(true)
   plugin.type.should.eql('template')
   plugin.extension.should.eql('tpl.html')
@@ -42,7 +47,7 @@ test('no plugin options', () => {
 
 suite('- Templates')
 test('format $templateCache', () => {
-  let {inHtml, outHtml, path} = data.compile
+  let {inHtml, path} = data.compile
   let {body} = data.templates
   let result = plugin.body(path, inHtml)
   result.should.equal(body)
@@ -60,6 +65,21 @@ test('htmlmin and wrapper template', done => {
     log(err, resp)
     resp.should.equal(outHtml)
     return done(err)
+  })
+})
+
+test('err callback on htmlmin#parse', done => {
+  let minStub = sinon.stub(plugin.minimize, 'parseAsync').returnsPromise()
+
+  minStub.rejects(new Error('invalid html'))
+
+  plugin.compile(data.compile.err, 'path.tpl.html', (err, resp) => {
+    let e = _.attempt(() => {
+      err.should.be.instanceOf(Error)
+      should.not.exist(resp)
+      minStub.restore()
+    })
+    done(e)
   })
 })
 
