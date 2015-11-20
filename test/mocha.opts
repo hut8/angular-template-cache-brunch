@@ -2,3 +2,4 @@
 --ui qunit
 --check-leaks
 --reporter mocha-better-spec-reporter
+./test/*.spec.js ./test/**/*.spec.js
