@@ -1,4 +1,4 @@
-import Plugin from '../index'
+import Plugin from '../src/template-cache-brunch'
 import data from './template-cache-brunch.data'
 import Minimize from 'minimize'
 import debug from 'debug'
