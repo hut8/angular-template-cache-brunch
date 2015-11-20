@@ -21,10 +21,9 @@
     "$templateCache"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --compilers js:babel-core/register",
     "test:watch": "DEBUG=angular-template-cache npm test -- -w",
-    "test:cov": "rm -rf reports && node_modules/.bin/isparta cover --dir reports/coverage --include-all-sources --report text --report html mocha",
-    "test:cov:watch": "npm run test:cov -- w",
+    "test:cov": "rm -rf reports && babel-node ./node_modules/.bin/isparta cover --dir reports/coverage --report text --report html _mocha",
     "compile": "babel src --out-dir lib",
     "compile:watch": "npm run compile -- -w",
     "start": "npm-run-all -p test:watch compile:watch",
@@ -44,6 +43,7 @@
     "brunch": ">= 1.8.0 < 2"
   },
   "devDependencies": {
+    "babel-cli": "^6.2.0",
     "babel-core": "^6.2.0",
     "babel-istanbul": "^0.5.8",
     "babel-preset-es2015": "6.1.18",

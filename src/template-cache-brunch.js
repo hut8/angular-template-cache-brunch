@@ -22,7 +22,7 @@ class AngularTemplateCacheCompiler {
 
   constructor (config) {
     this.config = config
-    this.options = this.config.plugins.angular_templates || this.options
+    if ((config.plugins || {}).angular_templates) this.options = this.config.plugins.angular_templates
     this.pathTransform = this.options.pathTransform || this._defaultPathTransform
     this.minimize = new Minimize(this.options.htmlmin)
     if (this.options.module) this.module = this.options.module

@@ -31,19 +31,13 @@ test('default pathTransform', () => {
 })
 
 test('custom pathTransform', () => {
-
-  let config = {
-    files: {templates: {joinTo: {}}}, plugins: {
-      angular_templates: {
-        pathTransform (path) {
-          return path.replace(/(.*)\.tpl\.html/, '$1')
-        }
-      }
-    }
-  }
-
-  let plugin = new Plugin(config)
+  let plugin = new Plugin(data.setup.transform)
   plugin.pathTransform('test.tpl.html').should.eql('test')
+})
+
+test('no plugin options', () => {
+  let plugin = new Plugin(data.bare)
+  plugin.options.should.eql({htmlmin: {}})
 })
 
 suite('- Templates')
