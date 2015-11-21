@@ -30,7 +30,10 @@
     "start": "npm-run-all -p test:watch build:watch",
     "prepush": "npm test",
     "prepublish": "npm run build",
+    "preversion": "./bin/merge.sh",
+    "version": "gulp changelog && git add changelog.md",
     "postversion": "git push --follow-tags",
+    "rel": "./bin/release.sh",
     "commit": "commit-wizard"
   },
   "config": {
@@ -55,6 +58,8 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "chai-things": "^0.2.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-conventional-changelog": "^0.7.0",
     "isparta": "^4.0.0",
     "lodash": "^3.10.1",
     "mocha": "^2.3.4",
