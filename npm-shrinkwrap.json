@@ -1,6 +1,6 @@
 {
   "name": "angular-template-cache-brunch",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
