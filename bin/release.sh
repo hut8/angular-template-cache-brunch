@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 set -e
 
-type=${1:-patch}
-npm version -m "feat(release): %s" ${type}
+# try rebase, if fails then do merge
+#it rebase ... || git rebase --abort
+
+merge () {
+  git pull -r --tags --quiet origin master
+  git co master
+  git merge develop
+}
+
+script () {
+  gulp changelog
+  git add changelog.md
+}
+
+version () {
+  type=${1:-patch}
+  mversion -n -m "feat(release): %s" ${type}
+}
+
+postversion () {
+  git push --dry-run --follow-tags
+}
+
+
+merge
+script
+version ${1}
+postversion

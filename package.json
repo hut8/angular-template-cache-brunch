@@ -30,9 +30,6 @@
     "start": "npm-run-all -p test:watch build:watch",
     "prepush": "npm test",
     "prepublish": "npm run build",
-    "preversion": "./bin/merge.sh",
-    "version": "gulp changelog && git add .",
-    "postversion": "git push --dry-run --follow-tags",
     "rel": "./bin/release.sh"
   },
   "peerDependencies": {
