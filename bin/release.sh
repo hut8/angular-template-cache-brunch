@@ -12,7 +12,7 @@ merge () {
 
 script () {
   gulp changelog
-  git add changelog.md
+  git add -A
 }
 
 version () {
