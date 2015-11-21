@@ -1,0 +1,25 @@
+env:
+  es6: true
+  node: true
+
+globals:
+  describe: on
+  it: on
+  beforeEach: on
+  before: on
+
+extends: standard
+parser: "babel-eslint"
+plugins:
+  - "babel"
+
+rules:
+  padded-blocks: 0
+  linebreak-style: [2, unix]
+  spaced-comment: 1
+  no-multiple-empty-lines: [2, {"max": 2, "maxEOF": 1}]
+  comma-dangle: 0
+  babel/generator-star-spacing: 1
+  babel/new-cap: 1
+  babel/object-curly-spacing: 1
+  babel/object-shorthand: 1

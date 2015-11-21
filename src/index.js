@@ -1,17 +1,8 @@
 /**
  * @author john
- * @version 11/8/15 3:56 PM
+ * @version 11/19/15 8:54 PM
  */
 
-import fs from 'fs'
-
-
-class Fuckers {
-
-  constructor () {
-    this.ass = 'asdf'
-  }
-}
-
-export default Fuckers
-
+import Plugin from './template-cache-brunch'
+module.exports = Plugin
+export default Plugin

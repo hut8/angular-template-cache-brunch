@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+- node
+
+cache:
+  directories:
+  - node_modules
+
+script: npm run compile
+
+deploy:
+  provider: npm
+  email: john.walker.dev@gmail.com
+  skip_cleanup: true
+  api_key:
+    secure: ELDcbEjLRpp+x0808NXpNVi2mvYBMIXD0SRESqLnZ5lBeBCo5Xq7yl84KwDK3GjhBPkoK/A8jHRconlULtld725Jne4aRB6VxBgKS1bq46VcOnNrTTaeQ6ylnxJmikqev4H3Rla94lKAP46v6Yc07Ql0hSZRyeobxIp1OMPXJooy4w3vc+MSsfGor2IZafSecphNf6syKqKq/7aFs7Ojg8tpJXmGXIvHTBab8y5G/SCAsIysRecEFXIqFGmzPvyC9aJL4i1G9UcKK25SVXKvcCSuULaxth+Q97uE4n/lbi3bhlK+OH1ka++KVhXTE9L/recjGaSSw9TUSN9yneQ3iLn9+cPPKkILusOkukEkve0298SIMOwZfKkEO1zoCOlz/Q0bAruFHXznDbz4ozqyMxZXkWaCMY1CbhgsJap/iunUbssy0j1uQbgJ9A01ugDb68LsGkCk6rEF35hzxwfuR+hEc9Cs58tuVLI2lUguVUo56ijyNBn9H8HAw7N8okAUw76b661RPv4vAdHIunUNWvOUFmRfqCW34YQfOhAPnCE7z6ZoVEU0vVxLvEt8lj3pDNCKRiQTsR1z0IcnyTIrhAlkTb2h7VGyGzVE6iQPNAkLFkHdZP7ol3UJCW/VX9NBzOI4RMEZRxlu6VfGZb+vxmrlffI212qiJlegmxX81s4=
+  on:
+    tags: true
+    repo: j-walker23/angular-template-cache-brunch
