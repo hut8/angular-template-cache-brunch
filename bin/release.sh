@@ -21,7 +21,7 @@ version () {
 }
 
 postversion () {
-  git push --dry-run --follow-tags
+  git push --follow-tags
 }
 
 
