@@ -1,5 +1,4 @@
 --ui qunit
---reporter mocha-better-spec-reporter
 -i src/*.js
 ./test/*.spec.js
 ./test/**/*.spec.js

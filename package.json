@@ -1,6 +1,6 @@
 {
   "name": "angular-template-cache-brunch",
-  "version": "1.8.3",
+  "version": "1.8.0",
   "main": "lib/index",
   "description": "Insert angular templates into $templateCache. Configurable with cool ES6 syntax",
   "author": "John Walker",
@@ -21,7 +21,7 @@
     "$templateCache"
   ],
   "scripts": {
-    "coverage": "rm -rf reports && babel-node ./node_modules/.bin/isparta cover  --dir reports/coverage --report text --report html _mocha",
+    "coverage": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report lcovonly _mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "bdd": "mocha --compilers js:babel-core/register -w",
     "lint": "echo \"Get eslint when eslint-babel supports v6\"",
     "test": "npm run lint && npm run coverage",
@@ -45,12 +45,14 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.1.0",
     "chai-things": "^0.2.0",
+    "coveralls": "^2.11.4",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-conventional-changelog": "^0.7.0",
     "isparta": "^4.0.0",
     "lodash": "^3.10.1",
     "mocha": "^2.3.4",
     "mocha-better-spec-reporter": "^3.0.1",
+    "mocha-lcov-reporter": "^1.0.0",
     "npm-run-all": "^1.3.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
