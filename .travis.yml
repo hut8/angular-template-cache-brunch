@@ -8,8 +8,9 @@ cache:
   - node_modules
 
 branches:
-  only:
-    - wtf
+  except:
+    - master
+    - develop
 
 install: npm install
 script: npm test && npm run build
