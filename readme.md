@@ -1,6 +1,12 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
+[![Coverage Status](https://coveralls.io/repos/j-walker23/angular-template-cache-brunch/badge.svg?branch=develop&service=github)](https://coveralls.io/github/j-walker23/angular-template-cache-brunch?branch=develop)
+
+[![Build Status](https://travis-ci.org/j-walker23/angular-template-cache-brunch.svg?branch=master)](https://travis-ci.org/j-walker23/angular-template-cache-brunch)
+
+[![Dependency Status](https://david-dm.org/j-walker23/angular-template-cache-brunch.svg)](https://david-dm.org/j-walker23/angular-template-cache-brunch)
+
 # Angular TemplateCache plugin for brunch
 
 ## NOTE: I am really into babel and es6 right now and the scalability of the plugin suffers from this. The angular modules use arrow functions.
