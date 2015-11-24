@@ -1,6 +1,6 @@
 {
   "name": "angular-template-cache-brunch",
-  "version": "1.8.4",
+  "version": "1.8.5",
   "main": "lib/index",
   "description": "Insert angular templates into $templateCache. Configurable with cool ES6 syntax",
   "author": "John Walker",
