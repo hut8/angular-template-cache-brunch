@@ -12,8 +12,9 @@ branches:
     - master
     - develop
 
-install: npm install
-script: npm test && npm run build
+install: npm install --save-dev
+script: npm test
+before_deploy: npm run build
 
 deploy:
   provider: npm
