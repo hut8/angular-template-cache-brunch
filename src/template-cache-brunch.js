@@ -14,7 +14,7 @@ let log = debug('angular-template-cache')
 class AngularTemplateCacheCompiler {
 
   type = 'template'
-  extension = 'tpl.html'
+  extension = 'html'
   module = 'app'
   options = {
     htmlmin: {}

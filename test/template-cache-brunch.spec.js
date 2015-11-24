@@ -26,7 +26,7 @@ suite('- Setup')
 test('initial class properties', done => {
   plugin.brunchPlugin.should.eql(true)
   plugin.type.should.eql('template')
-  plugin.extension.should.eql('tpl.html')
+  plugin.extension.should.eql('html')
   plugin.module.should.eql(data.config.plugins.angular_templates.module)
   done()
 })
