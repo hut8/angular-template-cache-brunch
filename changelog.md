@@ -1,3 +1,9 @@
+<a name="1.8.7"></a>
+## [1.8.7](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.7...v1.8.7) (2015-11-24)
+
+
+
+
 <a name="1.8.6"></a>
 ## [1.8.6](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.6...v1.8.6) (2015-11-24)
 
