@@ -14,7 +14,7 @@ let log = debug('angular-template-cache')
 class AngularTemplateCacheCompiler {
 
   type = 'template'
-  extension = 'html'
+  extension = 'tpl.html'
   module = 'app'
   options = {
     htmlmin: {}
@@ -29,7 +29,18 @@ class AngularTemplateCacheCompiler {
 
     this.pathTransform = this.options.pathTransform || this._defaultPathTransform
     this.minimize = new Minimize(this.options.htmlmin)
+
+    this.tplPath = this._setTemplatesPath(config)
     log('options', this.options)
+  }
+
+  _setTemplatesPath (config) {
+    let tplPath = null
+    try {
+      let keys = Object.keys(config.files.templates.joinTo)
+      tplPath = `${config.paths.public || 'public'}/${keys[0]}`
+    } catch (e) {}
+    return tplPath
   }
 
   _defaultPathTransform (path) {
@@ -37,16 +48,15 @@ class AngularTemplateCacheCompiler {
   }
 
   wrapper (url, html) {
-    return `(function() {
-    angular.module("${this.module}").run(["$templateCache", function($templateCache) {
-  ${this.body(this.pathTransform(url.replace(/\\/g, "/")), html)}}])
-  })()
-  `
+    return `
+angular.module("${this.module}").run(["$templateCache", function($templateCache) {
+  ${this.body(this.pathTransform(url.replace(/\\/g, "/")), html)}}
+])`
   }
 
   body (url, html) {
     return `$templateCache.put("${url}",
-      "${html}")`
+    "${html}")`
   }
 
   compile (data, path, callback) {
@@ -55,6 +65,10 @@ class AngularTemplateCacheCompiler {
       .parseAsync(data)
       .then(minData => callback(null, this.wrapper(path, minData)))
       .catch(err => callback(err, null))
+  }
+
+  onCompile (generatedFiles) {
+
   }
 
 }

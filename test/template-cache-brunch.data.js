@@ -19,12 +19,12 @@ export default {
     }
   },
   templates: {
-    body: '$templateCache.put("test/path.tpl.html",\n      "<div class="s" class></div>")'
+    body: '$templateCache.put("test/path.tpl.html",\n    "<div class="s" class></div>")'
   },
   compile: {
     inHtml: '<div class="s" class></div>',
     path: 'test/path.tpl.html',
-    outHtml: '(function() {\n    angular.module("app").run(["$templateCache", function($templateCache) {\n  $templateCache.put("test/path.tpl.html",\n      "<div class=s></div>")}])\n  })()\n  ',
+    outHtml: '\nangular.module("app").run(["$templateCache", function($templateCache) {\n  $templateCache.put("test/path.tpl.html",\n    "<div class=s></div>")}\n])',
     err: 'fuck'
   },
 

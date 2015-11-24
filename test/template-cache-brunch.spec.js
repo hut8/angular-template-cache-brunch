@@ -26,7 +26,7 @@ suite('- Setup')
 test('initial class properties', done => {
   plugin.brunchPlugin.should.eql(true)
   plugin.type.should.eql('template')
-  plugin.extension.should.eql('html')
+  plugin.extension.should.eql('tpl.html')
   plugin.module.should.eql(data.config.plugins.angular_templates.module)
   done()
 })
@@ -43,6 +43,22 @@ test('custom pathTransform', () => {
 test('no plugin options', () => {
   let plugin = new Plugin(data.bare)
   plugin.options.should.eql({htmlmin: {}})
+})
+
+test('set normal tplPath', () => {
+  plugin._setTemplatesPath(data.config).should.eql('public/js/templates.js')
+})
+
+test('tplPath is null on err', () => {
+  let plugin = new Plugin(data.bare)
+  plugin._setTemplatesPath({})
+  should.not.exist(plugin.tplPath)
+})
+
+test('tplPath uses default public', () => {
+  let plugin = new Plugin(data.bare)
+  let tplPath = plugin._setTemplatesPath({paths: {}, files: {templates: {joinTo: {temps: ''}}}})
+  tplPath.should.eql('public/temps')
 })
 
 suite('- Templates')
