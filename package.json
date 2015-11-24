@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "coverage": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report lcovonly _mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "bdd": "mocha --compilers js:babel-core/register -w",
+    "bdd": "DEBUG=angular-template-cache mocha --compilers js:babel-core/register --reporter mocha-better-spec-reporter -w",
     "lint": "echo \"Get eslint when eslint-babel supports v6\"",
     "test": "npm run lint && npm run coverage",
     "build": "rm -rf lib && babel src --out-dir lib",

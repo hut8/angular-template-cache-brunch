@@ -37,8 +37,10 @@ class AngularTemplateCacheCompiler {
   }
 
   wrapper (url, html) {
-    return `angular.module("${this.module}").run(["$templateCache", $templateCache => {
-  ${this.body(this.pathTransform(url), html)}}])
+    return `(function() {
+    angular.module("${this.module}").run(["$templateCache", function($templateCache) {
+  ${this.body(this.pathTransform(url.replace(/\\/g, "/")), html)}}])
+  })()
   `
   }
 
