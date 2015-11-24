@@ -1,3 +1,13 @@
+<a name="1.8.5"></a>
+## [1.8.5](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.5...v1.8.5) (2015-11-24)
+
+
+### Bug Fixes
+
+* **wrapper:** add iife in hopes module wrapping will work at runtime ([4b02486](https://github.com/j-walker23/angular-template-cache-brunch/commit/4b02486))
+
+
+
 <a name="1.8.4"></a>
 ## [1.8.4](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.4...v1.8.4) (2015-11-24)
 
