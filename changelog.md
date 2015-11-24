@@ -1,3 +1,13 @@
+<a name="1.8.6"></a>
+## [1.8.6](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.6...v1.8.6) (2015-11-24)
+
+
+### Features
+
+* **brunch 2:** update readme to reflect moving plugin to latest brunch ([d17a28d](https://github.com/j-walker23/angular-template-cache-brunch/commit/d17a28d))
+
+
+
 <a name="1.8.5"></a>
 ## [1.8.5](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.5...v1.8.5) (2015-11-24)
 
