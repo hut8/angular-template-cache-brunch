@@ -1,5 +1,6 @@
 import Plugin from '../src/template-cache-brunch'
 import data from './template-cache-brunch.data'
+import onCompileData from './on-compile.data'
 import Minimize from 'minimize'
 import debug from 'debug'
 import chai from 'chai'
@@ -23,7 +24,7 @@ log.log = console.log.bind(console)
 let plugin = new Plugin(data.config)
 
 suite('- Setup')
-test('initial class properties', done => {
+test('- initial class properties', done => {
   plugin.brunchPlugin.should.eql(true)
   plugin.type.should.eql('template')
   plugin.extension.should.eql('tpl.html')
@@ -31,38 +32,38 @@ test('initial class properties', done => {
   done()
 })
 
-test('default pathTransform', () => {
+test('- default pathTransform', () => {
   plugin.pathTransform('default').should.equal('default')
 })
 
-test('custom pathTransform', () => {
+test('- custom pathTransform', () => {
   let plugin = new Plugin(data.setup.transform)
   plugin.pathTransform('test.tpl.html').should.eql('test')
 })
 
-test('no plugin options', () => {
+test('- no plugin options', () => {
   let plugin = new Plugin(data.bare)
   plugin.options.should.eql({htmlmin: {}})
 })
 
-test('set normal tplPath', () => {
+test('- set normal tplPath', () => {
   plugin._setTemplatesPath(data.config).should.eql('public/js/templates.js')
 })
 
-test('tplPath is null on err', () => {
+test('- tplPath is null on err', () => {
   let plugin = new Plugin(data.bare)
   plugin._setTemplatesPath({})
   should.not.exist(plugin.tplPath)
 })
 
-test('tplPath uses default public', () => {
+test('- tplPath uses default public', () => {
   let plugin = new Plugin(data.bare)
   let tplPath = plugin._setTemplatesPath({paths: {}, files: {templates: {joinTo: {temps: ''}}}})
   tplPath.should.eql('public/temps')
 })
 
 suite('- Templates')
-test('format $templateCache', () => {
+test('- format $templateCache', () => {
   let {inHtml, path} = data.compile
   let {body} = data.templates
   let result = plugin.body(path, inHtml)
@@ -71,7 +72,7 @@ test('format $templateCache', () => {
 
 
 suite('- Compile')
-test('htmlmin and wrapper template', done => {
+test('- htmlmin and wrapper template', done => {
 
   plugin.minimize.should.be.instanceOf(Minimize)
 
@@ -84,7 +85,7 @@ test('htmlmin and wrapper template', done => {
   })
 })
 
-test('err callback on htmlmin#parse', done => {
+test('- err callback on htmlmin#parse', done => {
   let minStub = sinon.stub(plugin.minimize, 'parseAsync').returnsPromise()
 
   minStub.rejects(new Error('invalid html'))
@@ -99,3 +100,18 @@ test('err callback on htmlmin#parse', done => {
   })
 })
 
+suite('- On Compile')
+test('- write reg wrapper on template', () => {
+  let plugin = new Plugin(data.config)
+  let {raw, out} = onCompileData
+
+  let result = plugin.writeModuleReg(raw)
+  log('REG RESULT', result)
+  result.should.eql(out)
+})
+
+test('- onCompile writes a file', () => {
+  return plugin.onCompile().should.be.fulfilled
+})
+
+test('- does not duplicate require.register')
