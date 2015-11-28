@@ -19,7 +19,7 @@ export default {
     }
   },
   templates: {
-    body: '$templateCache.put("test/path.tpl.html",\n    "<div class="s" class></div>")'
+    body: '$templateCache.put("test/path.tpl.html",\n    "<div class=\\"s\\" class></div>")'
   },
   compile: {
     inHtml: '<div class="s" class></div>',

@@ -24,14 +24,15 @@ class AngularTemplateCacheCompiler {
   extension = 'tpl.html'
   module = 'app'
   options = {
-    htmlmin: {}
+    htmlmin: {},
+    quoteChar: '"'
   }
   compCount = 0
 
   constructor (config) {
     this.config = config
 
-    if ((config.plugins || {}).angular_templates) this.options = this.config.plugins.angular_templates
+    if ((config.plugins || {}).angular_templates) Object.assign(this.options, this.config.plugins.angular_templates)
 
     if (this.options.module) this.module = this.options.module
 
@@ -39,7 +40,14 @@ class AngularTemplateCacheCompiler {
     this.minimize = new Minimize(this.options.htmlmin)
 
     this.tplPath = this._setTemplatesPath(config)
+    this._setEscapeChars()
     log('options', this.options)
+  }
+
+  _setEscapeChars () {
+    this.options.bsRegexp = new RegExp('\\\\', 'g');
+    this.options.quoteRegexp = new RegExp('\\' + this.options.quoteChar, 'g');
+    this.options.nlReplace = '\\n' + this.options.quoteChar + ' +\n' + this.options.quoteChar;
   }
 
   _setTemplatesPath (config) {
@@ -67,7 +75,7 @@ angular.module("${this.module}").run(["$templateCache", function($templateCache)
 
   body (url, html) {
     return `$templateCache.put("${url}",
-    "${html}")`
+    "${this.escapeContent(html)}")`
   }
 
   compile (data, path, callback) {
@@ -99,6 +107,9 @@ angular.module("${this.module}").run(["$templateCache", function($templateCache)
     return data
   }
 
+  escapeContent (content) {
+    return content.replace(this.options.bsRegexp, '\\\\').replace(this.options.quoteRegexp, '\\' + this.options.quoteChar).replace(/\r?\n/g, this.options.nlReplace);
+  }
 }
 
 AngularTemplateCacheCompiler.prototype.brunchPlugin = true
