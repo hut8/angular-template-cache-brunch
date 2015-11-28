@@ -1,3 +1,17 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/j-walker23/angular-template-cache-brunch/compare/2.0.0...v2.0.0) (2015-11-28)
+
+
+### Bug Fixes
+
+* **tplPath:** with tests ([a98a853](https://github.com/j-walker23/angular-template-cache-brunch/commit/a98a853))
+
+### Features
+
+* **templates:** add register module wrapper ([21f3335](https://github.com/j-walker23/angular-template-cache-brunch/commit/21f3335))
+
+
+
 <a name="1.8.7"></a>
 ## [1.8.7](https://github.com/j-walker23/angular-template-cache-brunch/compare/1.8.7...v1.8.7) (2015-11-24)
 
