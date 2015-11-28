@@ -1,0 +1,7 @@
+# Mostly to un-ignore files from .gitignore
+
+# Compiled
+!lib/
+
+bin/
+

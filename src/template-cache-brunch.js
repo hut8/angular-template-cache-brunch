@@ -98,6 +98,7 @@ angular.module("${this.module}").run(["$templateCache", function($templateCache)
           this.compCount = 0
           log('err', err)
         } else {
+          log('** re-run onCompile **')
           this.compCount++
           setTimeout(() => this.onCompile(), 1000)
         }

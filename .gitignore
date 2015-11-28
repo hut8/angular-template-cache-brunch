@@ -1,7 +1,35 @@
-npm-debug.log
+# JetBrains
+*.iml
+.idea/workspace.xml
+.idea/.*
+.idea/libraries/
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/tasks.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
 
+# Git
+.git/
 
-.idea/
-node_modules/
+# Logs
+npm-debug.log*
+
+# Coverage directory used by tools like istanbul
 coverage/
-reports/
+
+# Compiled
+lib/
+dist/
+*.css.map
+*.js.map
+
+# Dependencies
+node_modules/
+bower_components/
+
