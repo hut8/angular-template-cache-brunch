@@ -2,6 +2,8 @@
 import debug from 'debug'
 import Minimize from 'minimize'
 import promisify from 'es6-promisify-all'
+let fs = promisify(require('fs'))
+
 
 /**
  * @author john
@@ -11,14 +13,20 @@ import promisify from 'es6-promisify-all'
 promisify(Minimize.prototype)
 let log = debug('angular-template-cache')
 
+const REG_PAT = /^(\sangular[\s\S]+)(\s;)/m
+const HEAD = '\nrequire.register("templates", function(exports, require, module) {\n'
+const FOOT = '});\n'
+const BODY = `${HEAD}$1\n${FOOT}$2`
+
 class AngularTemplateCacheCompiler {
 
   type = 'template'
-  extension = 'html'
+  extension = 'tpl.html'
   module = 'app'
   options = {
     htmlmin: {}
   }
+  compCount = 0
 
   constructor (config) {
     this.config = config
@@ -29,7 +37,18 @@ class AngularTemplateCacheCompiler {
 
     this.pathTransform = this.options.pathTransform || this._defaultPathTransform
     this.minimize = new Minimize(this.options.htmlmin)
+
+    this.tplPath = this._setTemplatesPath(config)
     log('options', this.options)
+  }
+
+  _setTemplatesPath (config) {
+    let tplPath = null
+    try {
+      let keys = Object.keys(config.files.templates.joinTo)
+      tplPath = `${config.paths.public || 'public'}/${keys[0]}`
+    } catch (e) {}
+    return tplPath
   }
 
   _defaultPathTransform (path) {
@@ -37,16 +56,18 @@ class AngularTemplateCacheCompiler {
   }
 
   wrapper (url, html) {
-    return `(function() {
-    angular.module("${this.module}").run(["$templateCache", function($templateCache) {
-  ${this.body(this.pathTransform(url.replace(/\\/g, "/")), html)}}])
-  })()
-  `
+    log('url', url)
+    let path = this.pathTransform(url.replace(/\\/g, "/"))
+    log('path', path)
+    return `
+angular.module("${this.module}").run(["$templateCache", function($templateCache) {
+  ${this.body(path, html)}}
+])`
   }
 
   body (url, html) {
     return `$templateCache.put("${url}",
-      "${html}")`
+    "${html}")`
   }
 
   compile (data, path, callback) {
@@ -57,8 +78,30 @@ class AngularTemplateCacheCompiler {
       .catch(err => callback(err, null))
   }
 
+  onCompile () {
+    log('onCompile', this.compCount++)
+    log('tplPath', this.tplPath)
+
+    return fs.readFileAsync(this.tplPath, 'utf-8')
+      .then(raw => this.writeModuleReg(raw))
+      .then(data => fs.writeFileAsync(this.tplPath, data, 'utf-8'))
+      .catch(err => log('err', err))
+  }
+
+  writeModuleReg (raw) {
+    log('raw len', raw.length)
+
+    if (!raw) throw new Error('No data in ' + this.tplPath)
+
+    if (/require.register\(/.test(raw)) throw new Error('Preventing duplication of register wrapper')
+
+    let data = raw.replace(REG_PAT, BODY)
+    return data
+  }
+
 }
 
 AngularTemplateCacheCompiler.prototype.brunchPlugin = true
 module.exports = AngularTemplateCacheCompiler
 export default AngularTemplateCacheCompiler
+

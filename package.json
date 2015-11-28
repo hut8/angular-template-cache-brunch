@@ -21,8 +21,10 @@
     "$templateCache"
   ],
   "scripts": {
+    "cover": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report html _mocha",
     "coverage": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report lcovonly _mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "bdd": "DEBUG=angular-template-cache mocha --compilers js:babel-core/register --reporter mocha-better-spec-reporter -w",
+    "bdd": "mocha --compilers js:babel-core/register --reporter mocha-better-spec-reporter -w",
+    "debug": "DEBUG=angular-template-cache npm run bdd",
     "lint": "echo \"Get eslint when eslint-babel supports v6\"",
     "test": "npm run lint && npm run coverage",
     "build": "rm -rf lib && babel src --out-dir lib",
