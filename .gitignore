@@ -1,6 +1,12 @@
 # JetBrains
 *.iml
 .idea/workspace.xml
+.idea/.*
+.idea/libraries/
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
 .idea/tasks.xml
 .idea/dataSources.ids
 .idea/dataSources.xml
