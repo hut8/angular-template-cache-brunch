@@ -1,8 +1,6 @@
 npm-debug.log
 
-
 .idea/
-lib/
 node_modules/
 coverage/
 reports/
