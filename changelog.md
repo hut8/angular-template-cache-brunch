@@ -1,3 +1,17 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/j-walker23/angular-template-cache-brunch/compare/2.0.3...v2.0.3) (2015-11-28)
+
+
+### Bug Fixes
+
+* **on-compile:** retry once if templates.js is initially not found ([7c97407](https://github.com/j-walker23/angular-template-cache-brunch/commit/7c97407))
+
+### Features
+
+* **release:** 2.0.3 ([9dcfd79](https://github.com/j-walker23/angular-template-cache-brunch/commit/9dcfd79))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/j-walker23/angular-template-cache-brunch/compare/2.0.2...v2.0.2) (2015-11-28)
 
