@@ -90,10 +90,12 @@ angular.module("${this.module}").run(["$templateCache", function($templateCache)
 
   writeModuleReg (raw) {
     log('raw len', raw.length)
+
     if (!raw) throw new Error('No data in ' + this.tplPath)
 
+    if (/require.register\(/.test(raw)) throw new Error('Preventing duplication of register wrapper')
+
     let data = raw.replace(REG_PAT, BODY)
-    //log('data', data)
     return data
   }
 

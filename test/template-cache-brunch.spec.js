@@ -114,4 +114,7 @@ test('- onCompile writes a file', () => {
   return plugin.onCompile().should.be.fulfilled
 })
 
-test('- does not duplicate require.register')
+test('- does not duplicate require.register', () => {
+  let {out} = onCompileData
+  plugin.writeModuleReg.bind(plugin, out).should.throw('Preventing duplication of register wrapper')
+})
