@@ -87,13 +87,21 @@ angular.module("${this.module}").run(["$templateCache", function($templateCache)
   }
 
   onCompile () {
-    log('onCompile', this.compCount++)
+    log('onCompile', this.compCount)
     log('tplPath', this.tplPath)
 
     return fs.readFileAsync(this.tplPath, 'utf-8')
       .then(raw => this.writeModuleReg(raw))
       .then(data => fs.writeFileAsync(this.tplPath, data, 'utf-8'))
-      .catch(err => log('err', err))
+      .catch(err => {
+        if (this.compCount) {
+          this.compCount = 0
+          log('err', err)
+        } else {
+          this.compCount++
+          setTimeout(() => this.onCompile(), 1000)
+        }
+      })
   }
 
   writeModuleReg (raw) {
