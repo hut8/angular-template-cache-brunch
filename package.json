@@ -20,6 +20,7 @@
     "ES2015",
     "$templateCache"
   ],
+  "files": "lib/",
   "scripts": {
     "cover": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report html _mocha",
     "coverage": "rm -rf coverage && babel-node ./node_modules/.bin/isparta cover --report lcovonly _mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
