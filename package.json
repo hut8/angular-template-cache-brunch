@@ -38,7 +38,7 @@
     "rel": "./bin/release.sh"
   },
   "peerDependencies": {
-    "brunch": ">= 2.0 < 2.5"
+    "brunch": ">= 2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.2.0",
